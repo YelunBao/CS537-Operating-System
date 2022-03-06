@@ -26,8 +26,28 @@ int mysh_execute(char **args, int redir_flag, char *output){
 		printf("parent of child process, pid = %u\n",getppid());
 
 		// char * argv_list[] = {"/bin/ls", "-l", ".", NULL};
+		int i = 0;
+		int j = 1;
+		char *token;
+		// printList(&ll0);
+		token = strtok(args[0], " \n");
+		char *tokens[64];
+		
+		/* walk through other tokens */
+		while( token != NULL ) {
+			// printf( " %s\n", token );
+			tokens[i] = token;
+			i++;
+			token = strtok(NULL, " \n");
+		}
+		while (args[j] != NULL) {
+			tokens[i] = args[j];
+			i++;
+			j++;
+		}
+		tokens[i] = NULL;
 
-		ret = execv(args[0],args);
+		ret = execv(tokens[0],tokens);
 		printf("return of execv() is %d\n", ret);
 		printf("%s\n", args[0]);
 		exit(1);
