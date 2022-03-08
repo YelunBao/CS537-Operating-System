@@ -29,10 +29,12 @@ void freeList(struct Linkedlist* ll){
    while (n != NULL) {
       previous = n;
       n = n->next;
+      free(previous->alias);
+      free(previous->path);
       free(previous);
    }
    ll->head = NULL;
-   printf("Free completed.");
+   // printf("Free completed.");
 }
 
 struct Node* search(struct Linkedlist* ll, char* x){
@@ -67,6 +69,7 @@ int insert(struct Linkedlist* ll, struct Node *new) {
    while(current != NULL) {
       if (strcmp(current->alias, new->alias) == 0) {
          // printf("Replace! alias is %s, %s\n", current->alias, new->alias);
+         free(current->path);
          current->path = new->path;
          return 0;
       }
@@ -110,34 +113,21 @@ struct Node* delete(struct Linkedlist *ll, char *key) {
    if(current == head) {
       //change first to point to next link
       ll->head = current->next;
+      free(current->alias);
+      free(current->path);
       free(current);
    } else {
       //bypass the current link
       previous->next = current->next;
+      free(current->alias);
+      free(current->path);
       free(current);
    }    
 	
    return current;
 }
 
-void addAlias(struct Linkedlist* ll, char* alias1, char* path1) {
-   // printf("pointer of ll is:  %p\n", ll);
-   // printf("original head of ll is:  %p\n", ll->head);
-  struct Node* p;
-  p = (struct Node*)malloc(sizeof(struct Node));
-  p->alias = alias1;
-  p->path = path1;
-  p->next = NULL;
-//   printf("This p is pointing to:  %p\n", p);
-//   printf("After new p created, the pointer of ll is:  %p\n", ll);
-//   printf("After new p created, the head of ll is:  %p\n", ll->head);
-//   if (ll->head != NULL)
-//       printf("After new p created, the content in ll's head is %s, %s", ll->head->alias,ll->head->path);
-  // printList(ll);
-  // printf("%s, %s\n", new->alias, new->path);
-  insert(ll, p);
-  // printList(&ll0);
-}
+
 
 // int main() {
 //    char s[] = "ls";

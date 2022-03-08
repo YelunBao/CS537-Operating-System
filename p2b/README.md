@@ -1,2 +1,5 @@
 # P2B Shell
-Compile demo.c to get the mysh program.
+Run make to compile mysh.
+
+## Remaining
+fix memory leak problem in test 19.
