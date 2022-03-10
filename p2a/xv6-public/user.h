@@ -23,6 +23,9 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int pinfo(void);
+void srand(uint seed);
+int ticket(int pid, int n_tickets);
 
 // ulib.c
 int stat(const char*, struct stat*);

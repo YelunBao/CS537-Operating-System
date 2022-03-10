@@ -89,3 +89,27 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+int
+sys_pinfo(void)
+{
+  return pinfo();
+}
+
+int
+sys_ticket(void)
+{
+  int pid, n_tickets;
+  if (argint(0, &pid) < 0)
+    return -1;
+  if (argint(1, &n_tickets) < 0)
+    return -1;
+  return ticket(pid, n_tickets);
+}
+
+int
+sys_srand(void)
+{
+  // Placeholder. Fill in after knowing extern variable.
+  return 0;
+}

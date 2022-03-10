@@ -120,6 +120,9 @@ void            userinit(void);
 int             wait(void);
 void            wakeup(void*);
 void            yield(void);
+int             pinfo(void);
+void            srand(uint seed);
+int             ticket(int pid, int n_tickets);
 
 // swtch.S
 void            swtch(struct context**, struct context*);
